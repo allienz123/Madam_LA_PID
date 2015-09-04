@@ -1,0 +1,52 @@
+<?php
+
+return [
+	'settings' => 'Settings',
+	'homepage' => 'View Homepage',
+	'home' => 'Home',
+	'welcome' => 'Welcome',
+    'action' => 'Actions',
+    'back' => 'Back',
+    'created_at' => 'Created at',
+    'language' => 'Language',
+    'yes'       => 'Yes',
+    'no'        =>  'No',
+    'view_detail' => 'View Details',
+    'news_categories' => 'News categories',
+    'news_items' => 'News items',
+    'photo_albums' => 'Photo albums',
+    'photo_items' => 'Photo items',
+    'video_albums' => 'Video albums',
+    'video_items' => 'Video items',
+    'users' => 'Users',
+    'id' => 'Id',
+    'segment_name' => 'Name of Segment',
+    'customer_segmentation' => 'Customer Segmentation',
+    'list_customer' => 'Customer List',
+    'customer_name' => 'Customer Name',
+    'sales_name' => 'Sales Name',
+    'segment' => 'Segmentation',
+    'sales' => 'Sales',
+    'customer_cp' => 'Customer CP',
+    'action' => 'Action',
+    'dc_location' => 'Datacenter Location',
+    'location' => 'Location', 
+    //Service Type
+    'service_name' => 'Service Name',
+    'services' => 'Services',
+    'it_services' => 'IT Services',
+    'datacom' => 'Data Communication',
+    //'dc_customer' => 'Datacenter Customer',
+    'cid' => 'CID Data',
+    'nojar' => 'Nojar',
+    'ip_address' => 'IP Address',
+    'netmask' => 'Subnetmask',
+    'gateway' => 'Gateway',
+    'fpb' => 'FPB Date',
+    'of' => 'OF Date',
+    'ob' => 'OB Date',
+    'date' => 'dd/mm/yy'
+    
+     
+
+	];
