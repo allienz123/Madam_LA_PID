@@ -5,6 +5,7 @@ use App\Customers;
 use App\CustomersSegment;
 use App\Http\Requests\Admin\CustomerRequest;
 use App\Http\Requests\Admin\DeleteRequest;
+use App\Http\Requests\Admin\ReorderRequest;
 use Illuminate\Support\Facades\Auth;
 use Datatables;
 
@@ -109,11 +110,13 @@ class CustomerController extends AdminController {
      */
     public function data()
     {
-        $customers = Customers::join('customers_segment','customers_segment.id','=','customers.customers_segment')
+        $customer = Customers::join('customers_segment','customers_segment.id','=','customers.customers_segment')
             ->select(array('customers.id','customers.customer_name','customers.customer_sales', 'customers_segment.segment_name', 'customers.id as cid_count'));
-        return Datatables::of($customers)
-            ->edit_column('cid_count', '<a class="btn btn-primary btn-sm" >{{ DB::table(\'dc_customers\')->where(\'customer_id\', \'=\', $id)->count() }}</a>')
-            ->add_column('Actions', '<a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
+        return Datatables::of($customer)
+            ->edit_column('cid_count', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/addCid\' ) }}}" class="btn btn-primary btn-sm" >
+                {{ DB::table(\'dc_customers\')->whereNull(\'deleted_at\')->where(\'customer_id\', \'=\', $id)->count() }}</a>')
+            ->add_column('actions', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/addCid\' ) }}}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-open"></span>  {{ trans("admin/modal.items") }}</a>
+                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
                 <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
             ->remove_column('id')
             ->make();

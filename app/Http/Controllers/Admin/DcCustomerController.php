@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\AdminController;
 use App\Customers;
-use App\CustomersSegment;
 use App\DcLocation;
 use App\DcCustomers;
 use App\ServiceType; 
-use App\Http\Requests\Admin\CustomerRequest;
+use App\Http\Requests\Admin\DcCustomerRequest;
 use App\Http\Requests\Admin\DeleteRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -23,6 +22,17 @@ class DcCustomerController extends AdminController {
     {
         // Show the page
         return view('admin.customers.dc_index');
+    }
+
+     /**
+     * Show a list of all the photo posts.
+     *
+     * @return View
+     */
+    public function addCid($id) {
+        $album = Customers::find($id);
+        // Show the page
+        return view('admin.customers.dc_index', compact('album'));
     }
 
     /**
@@ -49,17 +59,21 @@ class DcCustomerController extends AdminController {
      *
      * @return Response
      */
-    public function postCreate(CustomerRequest $request) {
+    public function postCreate(DcCustomerRequest $request) {
 
-        $dc_customer = new DcCustomers ();
-        $dc_customer -> nojar = $request->cid;
-		$dc_customer -> customer_name = $request->customer_name;
-        $dc_customer -> location = $request->location;
-        $dc_customer -> service_type = $request->service_type;
-        $dc_customer -> ip_address = $request->ip_address;
-        $dc_customer -> netmask = $request->netmask;
-        $dc_customer -> gateway = $request->gateway;
-        $dc_customer -> save();
+        $dccustomer = new DcCustomers();
+        $dccustomer -> cid = $request->cid; //$request for handling validation
+        $dccustomer -> customer_id = $request->customer_id;
+        $dccustomer -> dc_location = $request->dc_location;
+        $dccustomer -> service_type = $request->service_type;
+        $dccustomer -> ip_address = $request->ip_address;
+        $dccustomer -> netmask = $request->netmask;
+        $dccustomer -> gateway = $request->gateway;
+        $dccustomer -> fpb_date = date("Y-m-d", strtotime($request->fpb_date));
+        $dccustomer -> of_date = date("Y-m-d", strtotime($request->of_date));
+        $dccustomer -> ob_date = date("Y-m-d", strtotime($request->ob_date));
+
+        $dccustomer -> save();
     }
 
     /**
@@ -69,11 +83,14 @@ class DcCustomerController extends AdminController {
      * @return Response
      */
     public function getEdit($id) {
-
-        $customers = Customers::find($id);
-        $segment = $customers->customers_segment;
-        $segments = CustomersSegment::all();
-        return view('admin.customers.create_edit', compact('customers','segments','segment'));
+        $dccustomer = DcCustomers::find($id);
+        $customers = Customers::all();
+        $customer = $dccustomer->customer_id;
+        $locations = DcLocation::all();
+        $location = $dccustomer->dc_location;
+        $service_types = ServiceType::all();
+        $service_type = $dccustomer->service_type;
+        return view('admin.customers.create_edit_dc_customer', compact('dccustomer','customers','customer','location','locations','service_type','service_types'));
 
     }
 
@@ -83,14 +100,21 @@ class DcCustomerController extends AdminController {
      * @param $user
      * @return Response
      */
-    public function postEdit(CustomerRequest $request, $id) {
+    public function postEdit(DcCustomerRequest $request, $id) {
 
-        $customers = Customers::find($id);
-        $customers -> customer_name = $request->customer_name;
-        $customers -> customers_segment = $request->customers_segment;
-        $customers -> customer_sales = $request->customer_sales;
-        $customers -> customer_cp = $request->customer_cp;
-        $customers -> save();
+        $dccustomer = DcCustomers::find($id);
+        $dccustomer -> cid = $request->cid;
+        $dccustomer -> customer_id = $request->customer_id;
+        $dccustomer -> dc_location = $request->dc_location;
+        $dccustomer -> service_type = $request->service_type;
+        $dccustomer -> ip_address = $request->ip_address;
+        $dccustomer -> netmask = $request->netmask;
+        $dccustomer -> gateway = $request->gateway;
+        $dccustomer -> fpb_date = $request->fpb_date;
+        $dccustomer -> fpb_date = date("Y-m-d", strtotime($request->fpb_date));
+        $dccustomer -> of_date = date("Y-m-d", strtotime($request->of_date));
+        $dccustomer -> ob_date = date("Y-m-d", strtotime($request->ob_date));
+        $dccustomer -> save();
     }
     /**
      * Remove the specified resource from storage.
@@ -101,9 +125,9 @@ class DcCustomerController extends AdminController {
 
     public function getDelete($id)
     {
-        $customers = $id;
+        $dccustomer = $id;
         // Show the page
-        return view('admin.customers.delete', compact('customers'));
+        return view('admin.customers.dc_customer_delete', compact('dccustomer'));
     }
 
     /**
@@ -114,8 +138,8 @@ class DcCustomerController extends AdminController {
      */
     public function postDelete(DeleteRequest $request,$id)
     {
-        $customers = Customers::find($id);
-        $customers -> delete();
+        $dccustomer = DcCustomers::find($id);
+        $dccustomer -> delete();
     }
 
      /**
@@ -123,16 +147,19 @@ class DcCustomerController extends AdminController {
      *
      * @return Datatables JSON
      */
-    public function data()
+    public function data($albumid=0)
     {
-        $dc_customers = DcCustomers::join('customers','customers.id','=','dc_customers.customer_id')
+        $condition =(intval($albumid)==0)?">":"=";
+        $dccustomer = DcCustomers::join('customers','customers.id','=','dc_customers.customer_id')
             ->join('service_type','service_type.id','=','dc_customers.service_type')
             ->join('dc_location','dc_location.id','=','dc_customers.dc_location')
-            ->select(array('dc_customers.id', 'dc_customers.cid', 'customers.customer_name', 'dc_location.location_name'));
-        return Datatables::of($dc_customers)
-            ->add_column('Actions', '<a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
-                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
-            ->remove_column('id')
+            ->where('dc_customers.customer_id',$condition,$albumid)
+           // ->select(array('dc_customers.id','dc_customers.cid', 'customers.customer_name', 'dc_location.location_name'));
+            ->select(array('dc_customers.id', DB::raw($albumid . ' as albumid'), DB::getTablePrefix().'dc_customers.cid', DB::getTablePrefix().'customers.customer_name', 'dc_location.location_name'));
+        return Datatables::of($dccustomer)
+            ->add_column('Actions', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
+                <a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
+            ->remove_column('id')->remove_column('albumid')
             ->make();
     }
 

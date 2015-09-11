@@ -34,9 +34,9 @@ class CreateDcCustomersTable extends Migration
             $table->string('rack_location', 10);
             $table->string('u_location', 10);
             $table->string('port');
-            $table->date('fpb_date');
-            $table->date('of_date');
-            $table->date('ob_date');
+            $table->date('fpb_date')->nullable();
+            $table->date('of_date')->nullable();
+            $table->date('ob_date')->nullable();
             $table->string('power');
             $table->string('supporting_cid');
             $table->string('notes');

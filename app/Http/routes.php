@@ -20,6 +20,9 @@ Route::pattern('id', '[0-9]+');
 Route::get('news/{id}', 'ArticlesController@show');
 Route::get('video/{id}', 'VideoController@show');
 Route::get('photo/{id}', 'PhotoController@show');
+Route::get('customers/{id}', 'CustomerController@show');
+Route::get('dc_customer/{id}', 'DcCustomerController@show');
+
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
@@ -169,7 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
 
     # Datacenter Customer
     Route::get('dc_customer/', 'DcCustomerController@index');
-    Route::get('dc_customer/data', 'DcCustomerController@data');
+    Route::get('dc_customer/data/{id}', 'DcCustomerController@data');
     Route::get('dc_customer/reorder', 'DcCustomerController@getReorder');
     Route::get('dc_customer/create', 'DcCustomerController@getCreate');
     Route::post('dc_customer/create', 'DcCustomerController@postCreate');
@@ -177,6 +180,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::post('dc_customer/{id}/delete', 'DcCustomerController@postDelete');
     Route::get('dc_customer/{id}/edit', 'DcCustomerController@getEdit');
     Route::post('dc_customer/{id}/edit', 'DcCustomerController@postEdit');
+    Route::get('dc_customer/{id}/addCid', 'DcCustomerController@addCid');
+    //Route::get('dc_customer/data/{id}', 'DcCustomerController@data');
 
 
 

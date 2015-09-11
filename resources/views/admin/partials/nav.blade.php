@@ -22,12 +22,28 @@
             <span class="hidden-sm text"> Language</span>
         </a>
     </li>
-    <li class="{{set_active('admin/dc_customer*')}}">
-        <a href="{{url('admin/dc_customer')}}">
-            <i class="fa fa-language"></i>
-            <span class="hidden-sm text"> DC Customer</span>
+
+    <li class="{{set_active(['admin/customers','admin/dc_customer'])}}">
+        <a href="#">
+            <i class="glyphicon glyphicon-camera"></i> Customer
+            <span class="fa arrow"></span>
         </a>
+        <ul class="nav collapse">
+            <li class="{{set_active('admin/customers')}}">
+                <a href="{{url('admin/customers')}}">
+                    <i class="glyphicon glyphicon-list"></i>
+                    <span class="hidden-sm text"> Customer Data</span>
+                </a>
+            </li>
+            <li class="{{set_active('admin/dc_customer')}}">
+                <a href="{{url('admin/dc_customer')}}">
+                    <i class="glyphicon glyphicon-pushpin"></i>
+                    <span class="hidden-sm text"> CID</span>
+                </a>
+            </li>
+        </ul>
     </li>
+    
     <li class="{{set_active('admin/news*')}}">
         <a href="#">
             <i class="glyphicon glyphicon-bullhorn"></i> News items
@@ -94,7 +110,7 @@
             <span class="hidden-sm text"> Users</span>
         </a>
     </li>
-    <li class="{{set_active('admin/customers*')}}">
+    <li class="{{set_active(['admin/customerssegment','admin/location','admin/servicetype',])}}">
         <a href="#">
             <i class="glyphicon glyphicon-paperclip"></i> Administrasi DC
             <span class="fa arrow"></span>
@@ -104,12 +120,6 @@
                 <a href="{{url('admin/customerssegment')}}">
                     <i class="glyphicon glyphicon-pushpin"></i>
                     <span class="hidden-sm text"> Segmentation</span>
-                </a>
-            </li>
-            <li class="{{set_active('admin/customers')}}">
-                <a href="{{url('admin/customers')}}">
-                    <i class="glyphicon glyphicon-pushpin"></i>
-                    <span class="hidden-sm text"> Customer Data</span>
                 </a>
             </li>
             <li class="{{set_active('admin/location')}}">

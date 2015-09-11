@@ -24,11 +24,11 @@
         <thead>
         <tr>
             {{-- <th>{{{ trans("admin/admin.id") }}}</th> --}}
+            <th>{{{ trans("admin/admin.cid") }}}</th>
             <th>{{{ trans("admin/admin.customer_name") }}}</th>
-            <th>{{{ trans("admin/admin.sales_name") }}}</th>
-            <th>{{{ trans("admin/admin.segment") }}}</th>
-            <th>{{{ trans("admin/admin.segment") }}}</th>
-           {{-- <th>{{{ trans("admin/admin.action") }}}</th> --}}
+            <th>{{{ trans("admin/admin.location") }}}</th>
+            {{-- <th>{{{ trans("admin/admin.segment") }}}</th> --}}
+            <th>{{{ trans("admin/admin.action") }}}</th> 
         </tr>
         </thead>
         <tbody></tbody>
@@ -46,7 +46,7 @@
                 "sPaginationType": "bootstrap",
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ URL::to('admin/dc_customer/data/') }}",
+                "ajax": "{{ URL::to('admin/dc_customer/data/'.((isset($album))?$album->id:0)) }}",
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
