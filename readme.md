@@ -1,6 +1,5 @@
 # Laravel Framework 5.1  Bootstrap 3 Starter Site
 
-Demo is here http://l5start.mrakodol.info/
 
 ## Starter Site based on on Laravel 5.1 and Boostrap 3
 * [Features](#feature1)

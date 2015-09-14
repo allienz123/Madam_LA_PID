@@ -43,11 +43,18 @@
         var oTable;
         $(document).ready(function () {
             oTable = $('#table').DataTable({
-                "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
+                "sDom": "<'row'<'col-md-3'l><'col-md-5'><'col-md-4'f>r>t<'row'<'col-md-6'i><'col-md-6'p> >",
                 "sPaginationType": "bootstrap",
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/customers/data/') }}",
+                "columns": [
+                    {name: 'customers.id', searchable: false},
+                    {name: 'customers.customer_name'},
+                    {name: 'customers.customer_sales'},
+                    {name: 'customers.segment_name', searchable: false},
+                    {name: 'cid_count', searchable: false} 
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,

@@ -55,6 +55,22 @@ class DcCustomerController extends AdminController {
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function see($id) {
+        $dccustomer = DcCustomers::find($id);
+        $customers = Customers::all();
+        $customer = $dccustomer->customer_id;
+        $locations = DcLocation::all();
+        $location = $dccustomer->dc_location;
+        $service_types = ServiceType::all();
+        $service_type = $dccustomer->service_type;
+        return view('admin.customers.see_cid', compact('dccustomer','customers','customer','location','locations','service_type','service_types'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @return Response
@@ -62,6 +78,7 @@ class DcCustomerController extends AdminController {
     public function postCreate(DcCustomerRequest $request) {
 
         $dccustomer = new DcCustomers();
+        $dccustomer -> user_id = Auth::id();
         $dccustomer -> cid = $request->cid; //$request for handling validation
         $dccustomer -> customer_id = $request->customer_id;
         $dccustomer -> dc_location = $request->dc_location;
@@ -72,7 +89,10 @@ class DcCustomerController extends AdminController {
         $dccustomer -> fpb_date = date("Y-m-d", strtotime($request->fpb_date));
         $dccustomer -> of_date = date("Y-m-d", strtotime($request->of_date));
         $dccustomer -> ob_date = date("Y-m-d", strtotime($request->ob_date));
-
+        $dccustomer -> rack_location = $request->rack_location;
+        $dccustomer -> u_location = $request->u_location;
+        $dccustomer -> port = $request->port;
+        $dccustomer -> power = $request->power;
         $dccustomer -> save();
     }
 
@@ -103,6 +123,7 @@ class DcCustomerController extends AdminController {
     public function postEdit(DcCustomerRequest $request, $id) {
 
         $dccustomer = DcCustomers::find($id);
+        $dccustomer -> user_id_edited = Auth::id();
         $dccustomer -> cid = $request->cid;
         $dccustomer -> customer_id = $request->customer_id;
         $dccustomer -> dc_location = $request->dc_location;
@@ -155,11 +176,17 @@ class DcCustomerController extends AdminController {
             ->join('dc_location','dc_location.id','=','dc_customers.dc_location')
             ->where('dc_customers.customer_id',$condition,$albumid)
            // ->select(array('dc_customers.id','dc_customers.cid', 'customers.customer_name', 'dc_location.location_name'));
-            ->select(array('dc_customers.id', DB::raw($albumid . ' as albumid'), DB::getTablePrefix().'dc_customers.cid', DB::getTablePrefix().'customers.customer_name', 'dc_location.location_name'));
+            ->select(array('dc_customers.id', DB::raw($albumid . ' as albumid'), DB::getTablePrefix().'dc_customers.cid', DB::getTablePrefix().'service_type.service_name', DB::getTablePrefix().'customers.customer_name', DB::getTablePrefix(). 'dc_location.location_name', 'dc_customers.rack_location'));
+        
         return Datatables::of($dccustomer)
-            ->add_column('Actions', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
-                <a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
-            ->remove_column('id')->remove_column('albumid')
+            ->addColumn('Actions', '
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/see\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-eye-open"></span>  {{ trans("admin/modal.see") }}</a> 
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/edit\' ) }}}" class="btn btn-warning btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
+            ->removeColumn('id')
+            ->removeColumn('albumid')
+
+            //->filterColumn('id')
             ->make();
     }
 

@@ -1,10 +1,10 @@
-@extends('admin.layouts.modal') @section('content')
+@extends('admin.layouts.see') @section('content')
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#tab-general" data-toggle="tab">{{{
 			trans('admin/modal.general') }}}</a></li>
 </ul>
 <form class="form-horizontal" method="post"
-	 action="@if (isset($user)){{ URL::to('admin/dc_customer/' . $user->id . '/edit') }}@endif" 
+	 action="@if (isset($user)){{ URL::to('admin/cid/' . $user->id . '/see') }}@endif" 
 	 {{-- action="@if(isset($dccustomer)){{ URL::to('admin/cid/'.$dccustomer->id.'/edit') }}@else{{ URL::to('admin/cid/create') }}@endif"--}}
 	autocomplete="off">
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
@@ -18,7 +18,7 @@
 						<input class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.nojar') }} --}}" type="text"
 							name="cid" id="cid"
-							value="{{{ Input::old('cid', isset($dccustomer) ? $dccustomer->cid : null) }}}">
+							value="{{{ Input::old('cid', isset($dccustomer) ? $dccustomer->cid : null) }}}" disabled>
 					</div>
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 						<label class="col-md-2 control-label" for="customer_id">{{
 							trans("admin/admin.customer_name") }}</label> 
 							<div class="col-md-10">
-						<select style="width: 100%" name="customer_id" id="customer_id" class="form-control"> 
+						<select disabled style="width: 100%" name="customer_id" id="customer_id" class="form-control"> 
 							@foreach($customers as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($customer))
@@ -46,7 +46,7 @@
 						<label class="col-md-2 control-label" for="dc_location">{{
 							trans("admin/admin.location") }}</label> 
 							<div class="col-md-10">
-						<select style="width: 100%" name="dc_location" id="dc_location" class="form-control"> 
+						<select disabled style="width: 100%" name="dc_location" id="dc_location" class="form-control"> 
 							@foreach($locations as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($location))
@@ -64,7 +64,7 @@
 						<label class="col-md-2 control-label" for="service_type">{{
 							trans("admin/admin.service_name") }}</label> 
 							<div class="col-md-10">
-						<select style="width: 100%" name="service_type" id="service_type" class="form-control"> 
+						<select disabled style="width: 100%" name="service_type" id="service_type" class="form-control"> 
 							@foreach($service_types as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($service_type))
@@ -82,7 +82,7 @@
 					<label class="col-md-2 control-label" for="ip_address">{{
 						trans('admin/admin.ip_address') }}</label>
 					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
+						<input disabled class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.ip_address') }} --}}" type="text"
 							name="ip_address" id="ip_address"
 							value="{{{ Input::old('ip_address', isset($dccustomer) ? $dccustomer->ip_address : null) }}}">
@@ -95,7 +95,7 @@
 					<label class="col-md-2 control-label" for="netmask">{{
 						trans('admin/admin.netmask') }}</label>
 					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
+						<input disabled class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.netmask') }} --}}" type="text"
 							name="netmask" id="netmask"
 							value="{{{ Input::old('netmask', isset($dccustomer) ? $dccustomer->netmask : null) }}}">
@@ -108,7 +108,7 @@
 					<label class="col-md-2 control-label" for="gateway">{{
 						trans('admin/admin.gateway') }}</label>
 					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
+						<input disabled class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
 							name="gateway" id="gateway"
 							value="{{{ Input::old('gateway', isset($dccustomer) ? $dccustomer->gateway : null) }}}">
@@ -120,7 +120,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="fpb_date">{{ trans('admin/admin.fpb') }}</label>
                     <div class="col-md-10">
-                        <input class="form-control" tabindex="1" 
+                        <input disabled class="form-control" tabindex="1" 
                         placeholder="{{ trans('admin/admin.date') }}" type="text" 
                         name="fpb_date" id="fpb_date" 
                         value="{{{ Input::old('fpb_date', isset($dccustomer) ? date("d-M-Y", strtotime($dccustomer->fpb_date)) : null) }}}">
@@ -132,7 +132,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="of_date">{{ trans('admin/admin.of') }}</label>
                     <div class="col-md-10">
-                        <input class="form-control" tabindex="1" 
+                        <input disabled class="form-control" tabindex="1" 
                         placeholder="{{ trans('admin/admin.date') }}" type="text" 
                         name="of_date" id="of_date" 
                         value="{{{ Input::old('of_date', isset($dccustomer) ? date("d-M-Y", strtotime($dccustomer->of_date)) : null) }}}">
@@ -144,7 +144,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="ob_date">{{ trans('admin/admin.ob') }}</label>
                     <div class="col-md-10">
-                        <input class="form-control" tabindex="1" 
+                        <input disabled class="form-control" tabindex="1" 
                         placeholder="{{ trans('admin/admin.date') }}" type="text" 
                         name="ob_date" id="ob_date" 
                         value="{{{ Input::old('ob_date', isset($dccustomer) ? date("d-M-Y", strtotime($dccustomer->ob_date)) : null) }}}">
@@ -152,77 +152,13 @@
             </div>         
         </div>
 
-        <div class="col-md-12">
-				<div class="form-group">
-					<label class="col-md-2 control-label" for="rack_location">{{
-						trans('admin/admin.rack_location') }}</label>
-					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
-							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
-							name="rack_location" id="rack_location"
-							value="{{{ Input::old('rack_location', isset($dccustomer) ? $dccustomer->rack_location : null) }}}">
-					</div>
-				</div>
-		</div>
-
-		<div class="col-md-12">
-				<div class="form-group">
-					<label class="col-md-2 control-label" for="u_location">{{
-						trans('admin/admin.u_location') }}</label>
-					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
-							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
-							name="u_location" id="u_location"
-							value="{{{ Input::old('u_location', isset($dccustomer) ? $dccustomer->u_location : null) }}}">
-					</div>
-				</div>
-		</div>
-
-		<div class="col-md-12">
-				<div class="form-group">
-					<label class="col-md-2 control-label" for="port">{{
-						trans('admin/admin.port') }}</label>
-					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
-							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
-							name="port" id="port"
-							value="{{{ Input::old('port', isset($dccustomer) ? $dccustomer->port : null) }}}">
-					</div>
-				</div>
-		</div>
-
-		<div class="col-md-12">
-				<div class="form-group">
-					<label class="col-md-2 control-label" for="power">{{
-						trans('admin/admin.power') }}</label>
-					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
-							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
-							name="power" id="power"
-							value="{{{ Input::old('power', isset($dccustomer) ? $dccustomer->power : null) }}}">
-					</div>
-				</div>
-		</div>
-
 		</div>  {{-- End Div General--}}
 	</div>
 	<div class="form-group">
 		<div class="col-md-12">
 			<button type="reset" class="btn btn-sm btn-warning close_popup">
 				<span class="glyphicon glyphicon-ban-circle"></span> {{
-				trans("admin/modal.cancel") }}
-			</button>
-			<button type="reset" class="btn btn-sm btn-default">
-				<span class="glyphicon glyphicon-remove-circle"></span> {{
-				trans("admin/modal.reset") }}
-			</button>
-			<button type="submit" class="btn btn-sm btn-success">
-				<span class="glyphicon glyphicon-ok-circle"></span> 
-				    @if	(isset($dccustomer))
-				        {{ trans("admin/modal.edit") }}
-				    @else
-				        {{trans("admin/modal.create") }}
-				    @endif
+				trans("admin/modal.back") }}
 			</button>
 		</div>
 	</div>

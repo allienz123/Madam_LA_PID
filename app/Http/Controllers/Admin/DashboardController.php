@@ -8,6 +8,8 @@ use App\Video;
 use App\VideoAlbum;
 use App\Photo;
 use App\PhotoAlbum;
+use App\DcCustomers;
+use App\Customers;
 
 class DashboardController extends AdminController {
 
@@ -20,6 +22,8 @@ class DashboardController extends AdminController {
 	{
         $title = "Dashboard";
 
+        $customers = Customers::count();
+        $cids = DcCustomers::count();
         $news = Article::count();
         $newscategory = ArticleCategory::count();
         $users = User::count();
@@ -27,7 +31,7 @@ class DashboardController extends AdminController {
         $photoalbum = PhotoAlbum::count();
         $video = Video::count();
         $videoalbum = VideoAlbum::count();
-		return view('admin.dashboard.index',  compact('title','news','newscategory','video','videoalbum','photo',
+		return view('admin.dashboard.index',  compact('title','customers','cids','news','newscategory','video','videoalbum','photo',
             'photoalbum','users'));
 	}
 }

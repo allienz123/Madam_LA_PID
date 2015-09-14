@@ -18,15 +18,15 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="glyphicon glyphicon-bullhorn fa-3x"></i>
+                            <i class="glyphicon glyphicon-list fa-3x"></i>
                         </div>
-                        <div class="col-xs-9     text-right">
-                            <div class="huge">{{$newscategory}}</div>
-                            <div>{{ trans("admin/admin.news_categories") }}!</div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{$customers}}</div>
+                            <div>{{ trans("admin/admin.customer_total") }}</div>
                         </div>
                     </div>
                 </div>
-                <a href="{{URL::to('admin/newscategory')}}">
+                <a href="{{URL::to('admin/customers')}}">
                     <div class="panel-footer">
                         <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -44,12 +44,12 @@
                             <i class="glyphicon glyphicon-list fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">{{$news}}</div>
-                            <div>{{ trans("admin/admin.news_items") }}!</div>
+                            <div class="huge">{{$cids}}</div>
+                            <div>{{ trans("admin/admin.cid_total") }}</div>
                         </div>
                     </div>
                 </div>
-                <a href="{{URL::to('admin/news')}}">
+                <a href="{{URL::to('admin/cid')}}">
                     <div class="panel-footer">
                         <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

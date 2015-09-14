@@ -24,6 +24,8 @@ return [
     'customer_segmentation' => 'Customer Segmentation',
     'list_customer' => 'Customer List',
     'customer_name' => 'Customer Name',
+    'customer_total' => 'Total Customer',
+    'cid_total' => 'Total CID',
     'sales_name' => 'Sales Name',
     'segment' => 'Segmentation',
     'sales' => 'Sales',
@@ -45,7 +47,13 @@ return [
     'fpb' => 'FPB Date',
     'of' => 'OF Date',
     'ob' => 'OB Date',
-    'date' => 'dd/mm/yy'
+    'date' => 'dd/mm/yy',
+    'rack_location' => 'Rack Location',
+    'u_location' => 'U Location',
+    'port' => 'Port',
+    'power' => 'Power',
+    'supporting_cid' => 'Supporting CID',
+    'note' => 'Note',
     
      
 

@@ -171,17 +171,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::post('servicetype/{id}/edit', 'ServiceTypeController@postEdit');
 
     # Datacenter Customer
-    Route::get('dc_customer/', 'DcCustomerController@index');
-    Route::get('dc_customer/data/{id}', 'DcCustomerController@data');
-    Route::get('dc_customer/reorder', 'DcCustomerController@getReorder');
-    Route::get('dc_customer/create', 'DcCustomerController@getCreate');
-    Route::post('dc_customer/create', 'DcCustomerController@postCreate');
-    Route::get('dc_customer/{id}/delete', 'DcCustomerController@getDelete');
-    Route::post('dc_customer/{id}/delete', 'DcCustomerController@postDelete');
-    Route::get('dc_customer/{id}/edit', 'DcCustomerController@getEdit');
-    Route::post('dc_customer/{id}/edit', 'DcCustomerController@postEdit');
-    Route::get('dc_customer/{id}/addCid', 'DcCustomerController@addCid');
-    //Route::get('dc_customer/data/{id}', 'DcCustomerController@data');
+    Route::get('cid/', 'DcCustomerController@index');
+    Route::get('cid/data/{id}', 'DcCustomerController@data');
+    Route::get('cid/reorder', 'DcCustomerController@getReorder');
+    Route::get('cid/create', 'DcCustomerController@getCreate');
+    Route::post('cid/create', 'DcCustomerController@postCreate');
+    Route::get('cid/{id}/delete', 'DcCustomerController@getDelete');
+    Route::post('cid/{id}/delete', 'DcCustomerController@postDelete');
+    Route::get('cid/{id}/edit', 'DcCustomerController@getEdit');
+    Route::post('cid/{id}/edit', 'DcCustomerController@postEdit');
+    Route::get('cid/{id}/addCid', 'DcCustomerController@addCid');
+    Route::get('cid/{id}/see', 'DcCustomerController@see');
+
 
 
 

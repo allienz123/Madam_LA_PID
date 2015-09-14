@@ -40,6 +40,7 @@ class CustomerSegmentController extends AdminController {
     public function postCreate(SegmentRequest $request) {
 
         $segment = new CustomersSegment ();
+        $segment -> user_id = Auth::id();
         $segment -> segment_name = $request->segment_name;
         $segment -> save();
     }

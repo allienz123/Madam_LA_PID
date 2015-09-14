@@ -40,6 +40,7 @@ class LocationController extends AdminController {
     public function postCreate(LocationRequest $request) {
 
         $location = new DcLocation();
+        $location -> user_id = Auth::id();
         $location -> location_name = $request->location_name;
         $location -> save();
     }
@@ -100,6 +101,7 @@ class LocationController extends AdminController {
     public function postEdit(LocationRequest $request, $id) {
 
         $location = DcLocation::find($id);
+        $location -> user_id_edited = Auth::id();
         $location -> location_name = $request->location_name;
         $location -> save();
     }

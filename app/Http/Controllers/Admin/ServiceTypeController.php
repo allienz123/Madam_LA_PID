@@ -40,6 +40,7 @@ class ServiceTypeController extends AdminController {
     public function postCreate(ServiceTypeRequest $request) {
 
         $service = new ServiceType ();
+        $service -> user_id = Auth::id();
         //Validation
         $service -> service_name = $request->service_name;
         $service -> it_services = $request->it_services;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Customers;
+use App\DcCustomers;
 use App\CustomersSegment;
 use App\Http\Requests\Admin\CustomerRequest;
 use App\Http\Requests\Admin\DeleteRequest;
@@ -40,6 +41,7 @@ class CustomerController extends AdminController {
     public function postCreate(CustomerRequest $request) {
 
         $customers = new Customers ();
+        $customers -> user_id = Auth::id();
         $customers -> customer_name = $request->customer_name;
 		$customers -> customers_segment = $request->customers_segment;
         $customers -> customer_sales = $request->customer_sales;
@@ -71,6 +73,7 @@ class CustomerController extends AdminController {
     public function postEdit(CustomerRequest $request, $id) {
 
         $customers = Customers::find($id);
+        $customers -> user_id_edited = Auth::id();
         $customers -> customer_name = $request->customer_name;
         $customers -> customers_segment = $request->customers_segment;
         $customers -> customer_sales = $request->customer_sales;
@@ -111,14 +114,21 @@ class CustomerController extends AdminController {
     public function data()
     {
         $customer = Customers::join('customers_segment','customers_segment.id','=','customers.customers_segment')
-            ->select(array('customers.id','customers.customer_name','customers.customer_sales', 'customers_segment.segment_name', 'customers.id as cid_count'));
+            ->select(array(
+                'customers.id',
+                'customers.customer_name',
+                'customers.customer_sales', 
+                'customers_segment.segment_name', 
+                'customers.id as cid_count'));
         return Datatables::of($customer)
-            ->edit_column('cid_count', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/addCid\' ) }}}" class="btn btn-primary btn-sm" >
-                {{ DB::table(\'dc_customers\')->whereNull(\'deleted_at\')->where(\'customer_id\', \'=\', $id)->count() }}</a>')
-            ->add_column('actions', '<a href="{{{ URL::to(\'admin/dc_customer/\' . $id . \'/addCid\' ) }}}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-open"></span>  {{ trans("admin/modal.items") }}</a>
+            ->editColumn('cid_count', '<a href="{{{ URL::to(\'admin/cid/\' . $id . \'/addCid\' ) }}}" class="btn btn-primary btn-sm" >
+                 {{ DB::table(\'dc_customers\')->whereNull(\'deleted_at\')->where(\'customer_id\', \'=\', $id)->count() }}</a>')
+                            //{{ \App\DcCustomers::where(\'customer_id\', \'=\', $id)->whereNull(\'deleted_at\')->count() }}</a>')
+
+            ->addColumn('actions', '<a href="{{{ URL::to(\'admin/cid/\' . $id . \'/addCid\' ) }}}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-open"></span>  {{ trans("admin/modal.items") }}</a>
                 <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
                 <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
-            ->remove_column('id')
+            ->removeColumn('id')
             ->make();
     }
 

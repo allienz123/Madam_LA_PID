@@ -23,20 +23,20 @@
         </a>
     </li>
 
-    <li class="{{set_active(['admin/customers','admin/dc_customer'])}}">
+    <li class="{{set_active(['admin/customers','admin/cid*'])}}">
         <a href="#">
             <i class="glyphicon glyphicon-camera"></i> Customer
             <span class="fa arrow"></span>
         </a>
         <ul class="nav collapse">
-            <li class="{{set_active('admin/customers')}}">
+            <li class="{{set_active('admin/customers*')}}">
                 <a href="{{url('admin/customers')}}">
                     <i class="glyphicon glyphicon-list"></i>
                     <span class="hidden-sm text"> Customer Data</span>
                 </a>
             </li>
-            <li class="{{set_active('admin/dc_customer')}}">
-                <a href="{{url('admin/dc_customer')}}">
+            <li class="{{set_active('admin/cid*')}}">
+                <a href="{{url('admin/cid')}}">
                     <i class="glyphicon glyphicon-pushpin"></i>
                     <span class="hidden-sm text"> CID</span>
                 </a>
