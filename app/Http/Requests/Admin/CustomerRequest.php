@@ -12,11 +12,9 @@ class CustomerRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-            'customer_name' => 'required',
+            'customer_name' => 'required|unique:customers,customer_name',
             'customers_segment' => 'required|integer',
-            'customer_sales' => 'required',
-            'customer_cp' => 'required',
-           
+            'customer_sales' => 'required',           
 		];
 	}
 

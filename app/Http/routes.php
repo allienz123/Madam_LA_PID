@@ -20,8 +20,6 @@ Route::pattern('id', '[0-9]+');
 Route::get('news/{id}', 'ArticlesController@show');
 Route::get('video/{id}', 'VideoController@show');
 Route::get('photo/{id}', 'PhotoController@show');
-Route::get('customers/{id}', 'CustomerController@show');
-Route::get('dc_customer/{id}', 'DcCustomerController@show');
 
 
 Route::controllers([
@@ -34,7 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::pattern('id2', '[0-9]+');
 
     # Admin Dashboard
-    Route::get('dashboard', 'DashboardController@index');
+    Route::get('dashboard', ['uses' => 'DashboardController@index']);
 
     # Language
     Route::get('language', 'LanguageController@index');
@@ -183,7 +181,53 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::get('cid/{id}/addCid', 'DcCustomerController@addCid');
     Route::get('cid/{id}/see', 'DcCustomerController@see');
 
+     # Ex-Customer
+    Route::get('excustomer/', 'ExCustomerController@index');
+    Route::get('excustomer/data/', 'ExCustomerController@data');
+    Route::get('excustomer/{id}/activate', 'ExCustomerController@activate');
+    
+
+});
+
+Route::group(['prefix' => 'operator', 'middleware' => 'auth', 'namespace' => 'Operator'], function() {
+    Route::pattern('id', '[0-9]+');
+    Route::pattern('id2', '[0-9]+');
+
+    # Admin Dashboard
+    Route::get('dashboard', 'DashboardController@index');
+
+   # List Pelanggan
+    Route::get('customers/', 'CustomerController@index');
+    Route::get('customers/data', 'CustomerController@data');
+    Route::get('customers/{id}/see', 'CustomerController@see');
+
+    # Datacenter Customer
+    Route::get('cid/', 'DcCustomerController@index');
+    Route::get('cid/data/{id}', 'DcCustomerController@data');
+    Route::get('cid/reorder', 'DcCustomerController@getReorder');
+    Route::get('cid/create', 'DcCustomerController@getCreate');
+    Route::post('cid/create', 'DcCustomerController@postCreate');
+    Route::get('cid/{id}/delete', 'DcCustomerController@getDelete');
+    Route::post('cid/{id}/delete', 'DcCustomerController@postDelete');
+    Route::get('cid/{id}/edit', 'DcCustomerController@getEdit');
+    Route::post('cid/{id}/edit', 'DcCustomerController@postEdit');
+    Route::get('cid/{id}/addCid', 'DcCustomerController@addCid');
+    Route::get('cid/{id}/see', 'DcCustomerController@see');
+
+     # Ex-Customer
+    Route::get('excustomer/', 'ExCustomerController@index');
+    Route::get('excustomer/data/', 'ExCustomerController@data');    
+
+    #User Profile
+    Route::get('users/', 'UserController@index');
+    Route::get('users/data/', 'UserController@data');
+    Route::get('users/{id}/edit', 'UserController@getEdit');
+    Route::post('users/{id}/edit', 'UserController@postEdit');
+
+
 
 
 
 });
+
+

@@ -5,99 +5,66 @@
     <div class="page-header">
         <h2>Home Page</h2>
     </div></div>
-
-    @if(count($articles)>0)
-        <div class="row">
-            <h2>News</h2>
-            @foreach ($articles as $post)
-                <div class="col-md-6">
+ <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-8">
-                            <h4>
-                                <strong><a href="{{URL::to('news/'.$post->id.'')}}">{!!
-                                        $post->title !!}</a></strong>
-                            </h4>
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-list fa-3x"></i>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <a href="{{URL::to('news/'.$post->id.'')}}" class="thumbnail"><img
-                                        src="http://placehold.it/260x180" alt=""></a>
-                        </div>
-                        <div class="col-md-10">
-                            <p>{!! $post->introduction !!}</p>
-
-                            <p>
-                                <a class="btn btn-mini btn-default"
-                                   href="{{URL::to('news/'.$post->id.'')}}">Read more</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p></p>
-
-                            <p>
-                                <span class="glyphicon glyphicon-user"></span> by <span
-                                        class="muted">{!! $post->author->name !!}</span> | <span
-                                        class="glyphicon glyphicon-calendar"></span> {!! $post->created_at !!}
-                            </p>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{$customers}}</div>
+                            <div>{{ trans("admin/admin.customer_total") }}</div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+                @if(Auth::check())
+                @if(Auth::user()->admin==1)
+                <a href="{{URL::to('admin/customers')}}">
+                @elseif(Auth::user()->admin==0)
+                <a href="{{URL::to('operator/customers')}}">
+                @endif
+                @endif
+                    <div class="panel-footer">
+                        <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
         </div>
-    @endif
-
-    @if(count($photoAlbums)>0)
-        <div class="row">
-            <h2>Photos</h2>
-            @foreach($photoAlbums as $item)
-                <div class="col-sm-3">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
                     <div class="row">
-                        <a href="{{URL::to('photo/'.$item->id.'')}}"
-                           class="hover-effect"> @if($item->album_image!="")
-                                <img class="col-sm-12"
-                                        src="{!!'appfiles/photoalbum/'.$item->folder_id.'/thumbs/'.$item->album_image !!}">
-                            @elseif($item->album_image_first!="")
-                                <img class="col-sm-12"
-                                     src="{!!'appfiles/photoalbum/'.$item->folder_id.'/thumbs/'.$item->album_image_first !!}">
-                            @else
-                                <img class="col-sm-12" src="{!!'img/default-image.jpg' !!}">
-                            @endif
-                        </a>
-
-                        <div class=" col-sm-12">{!!$item->name!!}</div>
+                        <div class="col-xs-3">
+                            <i class="glyphicon glyphicon-list fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">{{$cids}}</div>
+                            <div>{{ trans("admin/admin.cid_total") }}</div>
+                        </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    @endif
+                @if(Auth::check())
+                @if(Auth::user()->admin==1)
+                <a href="{{URL::to('admin/cid')}}">
+                @elseif(Auth::user()->admin==0)
+                <a href="{{URL::to('operator/cid')}}">
+                @endif
+                @endif
+                    <div class="panel-footer">
+                        <span class="pull-left">{{ trans("admin/admin.view_detail") }}</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
-    @if(count($videoAlbums)>0)
-        <div class="row">
-            <h2>Videos</h2>
-            @foreach($videoAlbums as $item)
-                <div class="col-sm-3">
-                    <div class="row">
-                        <a href="{{URL::to('video/'.$item->id.'')}}">
-                            @if($item->album_image!="")
-                                <img class="col-sm-12"
-                                     src="{{{'http://img.youtube.com/vi/'.$item->album_image.'/hqdefault.jpg' }}}">
-                            @elseif($item->album_image_first!="")
-                                <img class="col-sm-12"
-                                     src="{{{'http://img.youtube.com/vi/'.$item->album_image_first.'/hqdefault.jpg' }}}">
-                            @else
-                                <img class="col-sm-12" src="{{'img/default-image.jpg' }}">
-                            @endif
-                        </a>
-
-                        <div class=" col-sm-12">{!!$item->name!!}</div>
+                        <div class="clearfix"></div>
                     </div>
-                </div>
-            @endforeach
+                </a>
+            </div>
         </div>
-    @endif
+    </div>
 
 @endsection
 

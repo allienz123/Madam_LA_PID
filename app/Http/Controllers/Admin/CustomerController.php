@@ -124,10 +124,11 @@ class CustomerController extends AdminController {
             ->editColumn('cid_count', '<a href="{{{ URL::to(\'admin/cid/\' . $id . \'/addCid\' ) }}}" class="btn btn-primary btn-sm" >
                  {{ DB::table(\'dc_customers\')->whereNull(\'deleted_at\')->where(\'customer_id\', \'=\', $id)->count() }}</a>')
                             //{{ \App\DcCustomers::where(\'customer_id\', \'=\', $id)->whereNull(\'deleted_at\')->count() }}</a>')
+              //  <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
 
-            ->addColumn('actions', '<a href="{{{ URL::to(\'admin/cid/\' . $id . \'/addCid\' ) }}}" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-open"></span>  {{ trans("admin/modal.items") }}</a>
-                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
-                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
+            ->addColumn('actions', '
+                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-xs iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
+                <a href="{{{ URL::to(\'admin/customers/\' . $id . \'/delete\' ) }}}" class="btn btn-danger btn-xs iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
             ->removeColumn('id')
             ->make();
     }

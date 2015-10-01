@@ -93,6 +93,8 @@ class DcCustomerController extends AdminController {
         $dccustomer -> u_location = $request->u_location;
         $dccustomer -> port = $request->port;
         $dccustomer -> power = $request->power;
+        $dccustomer -> notes = $request->notes;;
+
         $dccustomer -> save();
     }
 
@@ -135,6 +137,13 @@ class DcCustomerController extends AdminController {
         $dccustomer -> fpb_date = date("Y-m-d", strtotime($request->fpb_date));
         $dccustomer -> of_date = date("Y-m-d", strtotime($request->of_date));
         $dccustomer -> ob_date = date("Y-m-d", strtotime($request->ob_date));
+        $dccustomer -> rack_location = $request->rack_location;
+        $dccustomer -> u_location = $request->u_location;
+        $dccustomer -> port = $request->port;
+        $dccustomer -> power = $request->power;
+        $dccustomer -> notes = $request->notes;
+
+
         $dccustomer -> save();
     }
     /**
@@ -180,9 +189,9 @@ class DcCustomerController extends AdminController {
         
         return Datatables::of($dccustomer)
             ->addColumn('Actions', '
-                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/see\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-eye-open"></span>  {{ trans("admin/modal.see") }}</a> 
-                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/edit\' ) }}}" class="btn btn-warning btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
-                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/see\' ) }}}" class="btn btn-success btn-xs iframe"><span class="glyphicon glyphicon-eye-open"></span>  {{ trans("admin/modal.see") }}</a> 
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/edit\' ) }}}" class="btn btn-warning btn-xs iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> 
+                <a href="{{{ URL::to(\'admin/cid/\' . $id . \'/delete\' ) }}}" class="btn btn-danger btn-xs iframe"><span class="glyphicon glyphicon-trash"></span>  {{ trans("admin/modal.delete") }}</a>')
             ->removeColumn('id')
             ->removeColumn('albumid')
 

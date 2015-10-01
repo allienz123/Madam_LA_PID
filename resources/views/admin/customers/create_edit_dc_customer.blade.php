@@ -204,6 +204,19 @@
 				</div>
 		</div>
 
+		<div class="col-md-12">
+				<div class="form-group">
+					<label class="col-md-2 control-label" for="notes">{{
+						trans('admin/admin.note') }}</label>
+					<div class="col-md-10">
+						<input class="form-control" tabindex="1"
+							placeholder="{{-- {{ trans('admin/admin.gateway') }} --}}" type="text"
+							name="notes" id="notes"
+							value="{{{ Input::old('notes', isset($dccustomer) ? $dccustomer->notes : null) }}}">
+					</div>
+				</div>
+		</div>
+
 		</div>  {{-- End Div General--}}
 	</div>
 	<div class="form-group">

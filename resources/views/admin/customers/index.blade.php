@@ -49,7 +49,7 @@
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/customers/data/') }}",
                 "columns": [
-                    {name: 'customers.id', searchable: false},
+                    {name: 'customers.id', width: '30%', searchable: false},
                     {name: 'customers.customer_name'},
                     {name: 'customers.customer_sales'},
                     {name: 'customers.segment_name', searchable: false},

@@ -36,27 +36,37 @@ class Admin implements Middleware {
         $this->response = $response;
     }
     /**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
         if ($this->auth->check())
         {
             $admin = 0;
-            if($this->auth->user()->admin==1)
+            if($this->auth->user()->admin==1 && $this->auth->user()->confirmed==1)
             {
                 $admin=1;
             }
-            if($admin==0){
-                return $this->response->redirectTo('/');
+             if($this->auth->user()->admin==1 && $this->auth->user()->confirmed==0)
+            {
+                $admin=1;
+                return response(['error' => ['code' => 'Not_Activated | Banned','description' => 'You are not authorized to access this resource. Please ask your Administrator']], 401);
             }
+            if($admin==0 && $this->auth->user()->confirmed==1)
+            {
+                //return response(['error' => ['code' => 'INSUFFICIENT_ROLE','description' => 'You are not authorized to access this resource.']], 401);
+                 //return abort(403, 'Unauthorized action.');
+               //return $this->response->redirectTo ('resources/views/errors/503.blade.php');
+                return redirect('operator/dashboard')->with('status', 'You are not authorized to access this resource !!!');
+            }
+           
             return $next($request);
         }
         return $this->response->redirectTo('/');
-	}
+    }
 
 }

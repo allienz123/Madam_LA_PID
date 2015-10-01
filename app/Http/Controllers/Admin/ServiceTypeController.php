@@ -77,7 +77,7 @@ class ServiceTypeController extends AdminController {
         //$services = ServiceType::select('it_services');
         return Datatables::of($service)
         ->edit_column('it_services', '@if($it_services){{ trans("admin/admin.it_services") }} @else {{ trans("admin/admin.datacom") }} @endif')
-        ->add_column('Actions', '<a href="{{{ URL::to(\'admin/servicetype/\' . $id . \'/delete\' ) }}}"class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>')
+        ->add_column('Actions', '<a href="{{{ URL::to(\'admin/servicetype/\' . $id . \'/delete\' ) }}}"class="btn btn-xs btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>')
         ->remove_column('id')
         ->make();
     }

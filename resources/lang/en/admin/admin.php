@@ -54,7 +54,8 @@ return [
     'power' => 'Power',
     'supporting_cid' => 'Supporting CID',
     'note' => 'Note',
-    
+    'ex_customer' => 'Ex Customer',
+    'fpc' => 'FPC',
      
 
 	];

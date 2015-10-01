@@ -8,7 +8,7 @@
 	autocomplete="off">
 	<input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
 	<div class="tab-content">
-		<div class="tab-pane active" id="tab-general">
+		<div class="tab-pane active" id="tab-general"><br>
 			<div class="col-md-12">
 				<div class="form-group">
 					<label class="col-md-2 control-label" for="name">{{
@@ -96,7 +96,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-md-12">
+		<div class="col-md-12"><br>
 			<button type="reset" class="btn btn-sm btn-warning close_popup">
 				<span class="glyphicon glyphicon-ban-circle"></span> {{
 				trans("admin/modal.cancel") }}

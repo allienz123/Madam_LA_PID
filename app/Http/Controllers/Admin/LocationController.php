@@ -74,7 +74,7 @@ class LocationController extends AdminController {
         $location = DCLocation::whereNull('deleted_at')
         ->select(array('id','location_name', 'created_at', 'updated_at'));
         return Datatables::of($location)
-        ->add_column('Actions', '<a href="{{{ URL::to(\'admin/location/\' . $id . \'/edit\' ) }}}" class="btn btn-success btn-sm iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> <a href="{{{ URL::to(\'admin/location/\' . $id . \'/delete\' ) }}}" class="btn btn-success btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>')
+        ->add_column('Actions', '<a href="{{{ URL::to(\'admin/location/\' . $id . \'/edit\' ) }}}" class="btn btn-warning btn-xs iframe"><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a> <a href="{{{ URL::to(\'admin/location/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>')
         ->remove_column('updated_at')
         ->make();
     }

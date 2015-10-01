@@ -57,7 +57,7 @@
                                         Login
                                     </button>
 
-                                    <a href="{!! URL::to('/password/email') !!}">Forgot Your Password?</a>
+                                  {{--  <a href="{!! URL::to('/password/email') !!}">Forgot Your Password?</a> --}}
                                 </div>
                             </div>
                         </form>

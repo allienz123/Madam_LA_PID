@@ -13,23 +13,18 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ (Request::is('/') ? 'active' : '') }}">
-                    <a href="{!! URL::to('') !!}"><i class="fa fa-home"></i> Home</a>
+                <li class="{{ (Request::is('home') ? 'active' : '') }}">
+                     <a href="{!! URL::to('home') !!}"><i class="fa fa-home"></i> Home</a>                     
                 </li>
-                <li class="{{ (Request::is('about') ? 'active' : '') }}">
-                    <a href="{!! URL::to('about') !!}">About</a>
-                </li>
-                <li class="{{ (Request::is('contact') ? 'active' : '') }}">
-                    <a href="{!! URL::to('contact') !!}">Contact</a>
-                </li>
+                {{-- <li class="{{ (Request::is('about') ? 'active' : '') }}"><a href="{!! URL::to('about') !!}">About</a></li> --}}
+                {{-- <li class="{{ (Request::is('contact') ? 'active' : '') }}"><a href="{!! URL::to('contact') !!}">Contact</a></li> --}}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
                     <li class="{{ (Request::is('auth/login') ? 'active' : '') }}"><a href="{!! URL::to('auth/login') !!}"><i
                                     class="fa fa-sign-in"></i> Login</a></li>
-                    <li class="{{ (Request::is('auth/register') ? 'active' : '') }}"><a
-                                href="{!! URL::to('auth/register') !!}">Register</a></li>
+                 <li class="{{ (Request::is('auth/register') ? 'active' : '') }}"><a href="{!! URL::to('auth/register') !!}">Register</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -40,6 +35,13 @@
                                 @if(Auth::user()->admin==1)
                                     <li>
                                         <a href="{!! URL::to('admin/dashboard') !!}"><i class="fa fa-tachometer"></i> Dashboard</a>
+                                    </li>
+                                @elseif(Auth::user()->admin==0)
+                                    <li>
+                                        <a href="{!! URL::to('operator/dashboard') !!}"><i class="fa fa-tachometer"></i> Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="{!! URL::to('operator/users') !!}"><i class="fa fa-cogs"></i> Profile</a>
                                     </li>
                                 @endif
                                 <li role="presentation" class="divider"></li>

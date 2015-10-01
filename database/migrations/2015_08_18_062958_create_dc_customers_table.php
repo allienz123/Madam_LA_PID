@@ -31,9 +31,9 @@ class CreateDcCustomersTable extends Migration
             $table->string('ip_address', 50);
             $table->string('netmask', 50);
             $table->string('gateway', 50);
-            $table->string('rack_location', 10);
-            $table->string('u_location', 10);
-            $table->string('port', 10);
+            $table->string('rack_location', 50);
+            $table->string('u_location', 50);
+            $table->string('port', 50);
             $table->date('fpb_date')->nullable();
             $table->date('of_date')->nullable();
             $table->date('ob_date')->nullable();

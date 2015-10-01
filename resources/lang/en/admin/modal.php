@@ -14,5 +14,6 @@ return [
     'delete' => 'Delete',
     'see' => 'See',
     'back' => 'Back',
+    'activate' => 'Activate',
 
 ];
