@@ -13,7 +13,7 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<label class="col-md-2 control-label" for="cid">{{
-						trans('admin/admin.nojar') }}</label>
+						trans('admin/admin.cid') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.nojar') }} --}}" type="text"
@@ -29,6 +29,7 @@
 							trans("admin/admin.customer_name") }}</label> 
 							<div class="col-md-10">
 						<select style="width: 100%" name="customer_id" id="customer_id" class="form-control"> 
+							<option value=""></option>
 							@foreach($customers as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($customer))
@@ -47,6 +48,7 @@
 							trans("admin/admin.location") }}</label> 
 							<div class="col-md-10">
 						<select style="width: 100%" name="dc_location" id="dc_location" class="form-control"> 
+							<option value=""></option>
 							@foreach($locations as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($location))
@@ -65,6 +67,7 @@
 							trans("admin/admin.service_name") }}</label> 
 							<div class="col-md-10">
 						<select style="width: 100%" name="service_type" id="service_type" class="form-control"> 
+							<option value=""></option>
 							@foreach($service_types as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($service_type))

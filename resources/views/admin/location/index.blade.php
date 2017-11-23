@@ -27,11 +27,9 @@
     <table id="table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th>{{ trans("admin/admin.id") }}</th>
             <th>{{ trans("admin/admin.location") }}</th>
             <th>{{ trans("admin/admin.created_at") }}</th>
             <th>{{{ trans("admin/admin.action") }}}</th>
-
         </tr>
         </thead>
         <tbody>
@@ -48,10 +46,14 @@
             oTable = $('#table').DataTable({
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
-
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/location/data') }}",
+                "columns": [
+                    {name: 'location_name'},
+                    {name: 'created_at'}, 
+                    {name: 'action', searchable: false} 
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,

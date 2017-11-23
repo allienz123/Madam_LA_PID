@@ -15,7 +15,7 @@
 						trans('admin/admin.location') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="1"
-							placeholder="{{ trans('admin/admin.location') }}" type="text"
+							placeholder="" type="text"
 							name="location_name" id="location_name"
 							value="{{{ Input::old('location_name', isset($location) ? $location->location_name : null) }}}">
 					</div>

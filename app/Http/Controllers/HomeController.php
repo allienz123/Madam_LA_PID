@@ -4,6 +4,7 @@ use App\Customers;
 use App\DcCustomers;
 use Illuminate\Database\Eloquent;
 use Illuminate\Support\Facades\DB;
+use DNS1D;
 
 class HomeController extends Controller {
 
@@ -41,6 +42,14 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		// echo '<br/>';
+		// echo '<br/>';
+		// echo '<br/>';
+		// echo '<br/>';
+		// echo '<br/>';
+		// $data = '20160301120301';
+		// echo DNS1D::getBarcodeHTML($data, "C128", 2,25);
+		// echo $data;
 		$title = "Dashboard";
         $customers = Customers::count();
         $cids = DcCustomers::count();

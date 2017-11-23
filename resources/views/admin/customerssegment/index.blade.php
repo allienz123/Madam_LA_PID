@@ -27,7 +27,6 @@
     <table id="table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th>{{ trans("admin/admin.id") }}</th>
             <th>{{ trans("admin/admin.segment_name") }}</th>
             <th>{{ trans("admin/admin.created_at") }}</th>
             <th>{{{ trans("admin/admin.action") }}}</th>
@@ -48,10 +47,14 @@
             oTable = $('#table').DataTable({
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
-
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/customerssegment/data') }}",
+                "columns": [
+                    {name: 'segment_name'},
+                    {name: 'created_at', searchable: false},
+                    {name: 'action', searchable: false},
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
@@ -63,25 +66,7 @@
                     });
                 }
             });
-            var startPosition;
-            var endPosition;
-            $("#table tbody").sortable({
-                cursor: "move",
-                start: function (event, ui) {
-                    startPosition = ui.item.prevAll().length + 1;
-                },
-                update: function (event, ui) {
-                    endPosition = ui.item.prevAll().length + 1;
-                    var navigationList = "";
-                    $('#table #row').each(function (i) {
-                        navigationList = navigationList + ',' + $(this).val();
-                    });
-                    $.getJSON("{{ URL::to('admin/customerssegment/reorder') }}", {
-                        list: navigationList
-                    }, function (data) {
-                    });
-                }
-            });
+            
         });
     </script>
 @stop

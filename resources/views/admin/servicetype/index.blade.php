@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title') {{{ trans("admin/admin.customer_segmentation") }}} ::
-@parent @stop
+@parent @endsection
 
 @section('styles')
     @parent
@@ -37,7 +37,7 @@
         <tbody>
         </tbody>
     </table>
-@stop
+@endsection
 
 {{-- Scripts --}}
 @section('scripts')
@@ -48,10 +48,15 @@
             oTable = $('#table').DataTable({
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
-
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/servicetype/data') }}",
+                "columns": [
+                    {name: 'service_name'},
+                    {name: 'it_services', searchable: false},
+                    {name: 'created_at'},
+                    {name: 'action', searchable: false},
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
@@ -84,4 +89,4 @@
             });
         });
     </script>
-@stop
+@endsection

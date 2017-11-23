@@ -15,7 +15,7 @@
 						trans('admin/users.name') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="1"
-							placeholder="{{ trans('admin/users.name') }}" type="text"
+							placeholder="" type="text"
 							name="name" id="name"
 							value="{{{ Input::old('name', isset($user) ? $user->name : null) }}}">
 					</div>
@@ -28,7 +28,7 @@
 						trans('admin/users.username') }}</label>
                     <div class="col-md-10">
                         <input class="form-control" type="username" tabindex="4"
-                               placeholder="{{ trans('admin/users.username') }}" name="username"
+                               placeholder="" name="username"
                                id="username"
                                value="{{{ Input::old('username', isset($user) ? $user->username : null) }}}" />
                         {!! $errors->first('username', '<label class="control-label"
@@ -42,7 +42,7 @@
 						trans('admin/users.email') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="email" tabindex="4"
-							placeholder="{{ trans('admin/users.email') }}" name="email"
+							placeholder="" name="email"
 							id="email"
 							value="{{{ Input::old('email', isset($user) ? $user->email : null) }}}" />
 						{!! $errors->first('email', '<label class="control-label"
@@ -57,7 +57,7 @@
 						trans('admin/users.password') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="5"
-							placeholder="{{ trans('admin/users.password') }}"
+							placeholder=""
 							type="password" name="password" id="password" value="" />
 						{!!$errors->first('password', '<label class="control-label"
 							for="password">:message</label>')!!}
@@ -70,7 +70,7 @@
 						trans('admin/users.password_confirmation') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" type="password" tabindex="6"
-							placeholder="{{ trans('admin/users.password_confirmation') }}"
+							placeholder=""
 							name="password_confirmation" id="password_confirmation" value="" />
 						{!!$errors->first('password_confirmation', '<label
 							class="control-label" for="password_confirmation">:message</label>')!!}
@@ -83,6 +83,8 @@
 						trans('admin/users.activate_user') }}</label>
 					<div class="col-md-6">
 						<select class="form-control" name="confirmed" id="confirmed">
+							<option value="" {{{ ((isset($user) && $user->confirmed == null) ?
+								' selected="selected"' : '') }}}></option>
 							<option value="1" {{{ ((isset($user) && $user->confirmed == 1)? '
 								selected="selected"' : '') }}}>{{{ trans('admin/users.yes')
 								}}}</option>
@@ -93,6 +95,24 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-md-12">
+				<div class="form-"><br>
+					<label class="col-md-2 control-label" for="confirm">{{
+						trans('admin/admin.role') }}</label>
+					<div class="col-md-6">
+						<select class="form-control" name="admin" id="admin">
+							<option value="" {{{ ((isset($user) && $user->admin == null) ?
+								' selected="selected"' : '') }}}></option>
+							<option value="0" {{{ ((isset($user) && $user->admin == 0) ?
+								' selected="selected"' : '') }}}>Operator</option>
+							<option value="1" {{{ ((isset($user) && $user->admin == 1)? '
+								selected="selected"' : '') }}}>Admin</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div class="form-group">

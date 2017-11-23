@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title') {{{ trans("admin/users.users") }}} :: @parent
-@stop
+@endsection
 
 {{-- Content --}}
 @section('main')
@@ -13,8 +13,7 @@
                 <div class="pull-right">
                     <a href="{{{ URL::to('admin/users/create') }}}"
                        class="btn btn-sm  btn-primary iframe"><span
-                                class="glyphicon glyphicon-plus-sign"></span> {{
-					trans("admin/modal.new") }}</a>
+                                class="glyphicon glyphicon-plus-sign"></span> {{ trans("admin/modal.new") }}</a>
                 </div>
             </div>
         </h3>
@@ -26,13 +25,14 @@
             <th>{{{ trans("admin/users.name") }}}</th>
             <th>{{{ trans("admin/users.email") }}}</th>
             <th>{{{ trans("admin/users.active_user") }}}</th>
+            <th>{{{ trans("admin/admin.role") }}}</th>
             <th>{{{ trans("admin/admin.created_at") }}}</th>
             <th>{{{ trans("admin/admin.action") }}}</th>
         </tr>
         </thead>
         <tbody></tbody>
     </table>
-@stop
+@endsection
 
 {{-- Scripts --}}
 @section('scripts')
@@ -46,6 +46,14 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('admin/users/data/') }}",
+                 "columns": [
+                    {name: 'users.id'},
+                    {name: 'users.email'},
+                    {name: 'users.confirmed', searchable: false},
+                    {name: 'users.admin', searchable: false},
+                    {name: 'users.created_at', searchable: false}, 
+                    {name: 'actions', searchable: false} 
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,
@@ -59,4 +67,4 @@
             });
         });
     </script>
-@stop
+@endsection

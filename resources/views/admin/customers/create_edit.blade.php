@@ -10,7 +10,7 @@
 	<div class="tab-content">
 		<div class="tab-pane active" id="tab-general">
 			<div class="col-md-12">
-				<div class="form-group">
+				<div class="form-group"><br>
 					<label class="col-md-2 control-label" for="name">{{
 						trans('admin/admin.customer_name') }}</label>
 					<div class="col-md-10">
@@ -28,6 +28,7 @@
 							trans("admin/admin.segment") }}</label> 
 							<div class="col-md-10">
 						<select style="width: 100%" name="customers_segment" id="customers_segment" class="form-control"> 
+							<option value=""></option>
 							@foreach($segments as $item)
 								<option value="{{$item->id}}"
 									@if(!empty($segment))

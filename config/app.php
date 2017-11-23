@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta', //set Asia/Jakarta
 
     /*
     |--------------------------------------------------------------------------
@@ -153,6 +153,11 @@ return [
 		Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         'Zizaco\Entrust\EntrustServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\Elfinder\ElfinderServiceProvider',
+        Milon\Barcode\BarcodeServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -211,6 +216,12 @@ return [
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Entrust' => 'Zizaco\Entrust\EntrustFacade',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
+
 
     ],
 

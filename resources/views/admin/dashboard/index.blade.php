@@ -6,6 +6,7 @@
 {{-- Content --}}
 @section('main')
 
+
     <div class="page-header">
         <h3>
             {{$title}}
@@ -60,4 +61,105 @@
             </div>
         </div>
     </div>
-@endsection
+
+            <div id="containerGraph" class="panel panel-footer"></div>
+
+
+@stop
+
+{{-- Scripts --}}
+@section('scripts')
+    @parent
+   <script type="text/javascript">
+$(function () {
+    $(document).ready(function () {
+    // Highcharts.setOptions({
+    //     global: {
+    //     useUTC: false
+    //     }
+    // });
+
+      $('#containerGraph').highcharts({
+        chart: {
+          type: 'pie',
+          //animation: Highcharts.svg, // don't animate in old IE
+          marginLeft: 50,
+          // events: {
+          //   load: function () {
+          //     // set up the updating of the chart each second
+          //     var series = this.series[0];
+          //     setInterval(function () {
+          //       var x = (new Date()).getTime(), // current time
+          //           y = Math.random();
+          //       series.addPoint([x, y], true, true);
+          //     }, 1000);
+          //   }
+          // }
+        },
+        title: {
+          text: 'DC Customer Segmentation',
+          style : {
+            fontWeight: 'bold'
+          }
+
+        },
+        // tooltip: {
+        //   // formatter: function () {
+        //   //   return '<b>' + this.series.name + '</b><br/>' +
+        //   //     Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+        //   //     Highcharts.numberFormat(this.y);
+        //   }
+        // },
+        legend: {
+            enabled: true
+        },
+        exporting: {
+            enabled: true
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+          name: 'Total Customer',
+          allowPointSelect: true,
+          cursor: 'pointer',
+          colorByPoint: 'true',
+          data:  {!! json_encode($countSegment) !!},
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            color: '(Highcharts.theme && Highcharts.theme.contrastTextColor)' || 'black'
+          },
+          events:{
+            click: function(){
+               // var x = getVa
+                //alert('Customer :' + this.y +', value:'+ this.name);
+                 //window.location.href = '{{ URL::to('admin/customers') }}';
+                //var chart = $('#containerGraph').highcharts(),
+               // series = chart.getSelectedPoints();
+               //var x = {!! json_encode($countSegment) !!};
+               //location.href = this.options.url;
+
+            }
+          },
+          showInLegend: true
+        }],
+        legend: {
+            title: {
+                text: 'Segmentation :',
+
+            },
+            layout: 'vertical',
+            verticalAlign: 'middle',
+            align: 'right'
+        },
+        });
+        });
+    });
+</script>
+@stop
+
+
+
+
+

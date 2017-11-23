@@ -70,12 +70,29 @@
             </li>
         </ul>
     </li>
+
+    {{-- Show metisMenu Alarm Log--}}
+    <li class="{{set_active('admin/alarm')}}">
+        <a href="{{url('admin/alarm')}}">
+        <i class="fa fa-bell"></i>
+        <span class="hidden-sm text"> Alarm Logs</span>
+        </a>
+    </li>
     
     {{-- Show metisMenu Users--}}
     <li class="{{set_active('admin/users*')}}">
         <a href="{{url('admin/users')}}">
             <i class="glyphicon glyphicon-user"></i>
             <span class="hidden-sm text"> Users</span>
+        </a>
+    </li>
+    {{-- Show metisMenu Open DCIM--}}
+    <li>
+            <!-- <a href="http://183.91.78.181/~dcim/opendcim/" target="_blank"> -->
+            <!-- for security reason, opendcim address has changed to http://183.91.78.180:9090/~dcim/opendcim/ --> 
+            <a href="http://183.91.78.180:9090/~dcim/opendcim/" target="_blank">
+            <i class="fa fa-hand-o-right"></i>
+            <span class="hidden-sm text"> Open DCIM</span>
         </a>
     </li>
     

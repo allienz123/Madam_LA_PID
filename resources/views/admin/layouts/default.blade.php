@@ -28,7 +28,9 @@
     <script src="{{asset('assets/admin/js/bootstrap-dataTables-paging.js')}}"></script>
     <script src="{{asset('assets/admin/js/datatables.fnReloadAjax.js')}}"></script>
     <script src="{{asset('assets/admin/js/modal.js')}}"></script>
-
+    <script src="{{asset('assets/admin/js/highcharts.js')}}"></script>
+    <script src="{{asset('assets/admin/js/exporting.js')}}"></script>
+    
     {{-- Default admin scripts--}}
     <script type="text/javascript">
         {{-- from sb-admin-2 --}}

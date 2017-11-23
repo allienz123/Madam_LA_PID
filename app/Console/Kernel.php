@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\checkLogs::class
     ];
 
     /**
@@ -24,7 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('inspire')
-                 ->hourly();
+        //Automatically check alarm log whether has been checked or not every ten minutes
+        $schedule->command('check:logs')->everyFiveMinutes();
+        //$schedule->call('App\Http\Controllers\Operator\AlarmLogsController@checkLogs')->everyMinute();
     }
 }

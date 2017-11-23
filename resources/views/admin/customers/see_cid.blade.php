@@ -2,6 +2,8 @@
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#tab-general" data-toggle="tab">{{{
 			trans('admin/modal.general') }}}</a></li>
+			<li class="passive"><a href="#tab-general" data-toggle="tab">{{{
+			trans('admin/modal.general') }}}</a></li>
 </ul>
 <form class="form-horizontal" method="post"
 	 action="@if (isset($user)){{ URL::to('admin/cid/' . $user->id . '/see') }}@endif" 
@@ -218,6 +220,7 @@
 		</div>
 
 		</div>  {{-- End Div General--}}
+
 	</div>
 	<div class="form-group">
 		<div class="col-md-12">

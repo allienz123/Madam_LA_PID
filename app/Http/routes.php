@@ -145,6 +145,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::post('customers/{id}/delete', 'CustomerController@postDelete');
     Route::get('customers/{id}/edit', 'CustomerController@getEdit');
     Route::post('customers/{id}/edit', 'CustomerController@postEdit');
+    Route::get('customers/export', 'CustomerController@exportExcel');
+
 
      # List Location
     Route::get('location/', 'LocationController@index');
@@ -185,6 +187,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'namespace' => 'Admin
     Route::get('excustomer/', 'ExCustomerController@index');
     Route::get('excustomer/data/', 'ExCustomerController@data');
     Route::get('excustomer/{id}/activate', 'ExCustomerController@activate');
+
+    #Show alarm logs
+    Route::get('alarm/', 'AlarmLogsController@index');
+    Route::get('alarm/data/', 'AlarmLogsController@data');
+    Route::get('alarm/{id}/view', 'AlarmLogsController@getView');
+    Route::post('alarm/{id}/view', 'AlarmLogsController@postView');
+    Route::get('alarm/{id}/ack', 'AlarmLogsController@getAck');
+    Route::post('alarm/{id}/ack', 'AlarmLogsController@postAck');
+    Route::get('alarm/export', 'AlarmLogsController@exportExcel');
     
 
 });
@@ -200,6 +211,8 @@ Route::group(['prefix' => 'operator', 'middleware' => 'auth', 'namespace' => 'Op
     Route::get('customers/', 'CustomerController@index');
     Route::get('customers/data', 'CustomerController@data');
     Route::get('customers/{id}/see', 'CustomerController@see');
+    Route::get('customers/export', 'CustomerController@exportExcel');
+
 
     # Datacenter Customer
     Route::get('cid/', 'DcCustomerController@index');
@@ -223,6 +236,40 @@ Route::group(['prefix' => 'operator', 'middleware' => 'auth', 'namespace' => 'Op
     Route::get('users/data/', 'UserController@data');
     Route::get('users/{id}/edit', 'UserController@getEdit');
     Route::post('users/{id}/edit', 'UserController@postEdit');
+
+    #Show alarm logs
+    Route::get('alarm/', 'AlarmLogsController@index');
+    Route::get('alarm/data/', 'AlarmLogsController@data');
+    Route::get('alarm/{id}/view', 'AlarmLogsController@getView');
+    Route::post('alarm/{id}/view', 'AlarmLogsController@postView');
+    Route::get('alarm/{id}/ack', 'AlarmLogsController@getAck');
+    Route::post('alarm/{id}/ack', 'AlarmLogsController@postAck');
+    Route::get('alarm/export', 'AlarmLogsController@exportExcel');
+
+    #Show inventory
+    Route::get('inventory/', 'InventoryController@index');  
+    Route::get('inventory/data', 'InventoryController@data');    
+    Route::post('inventory/', 'InventoryController@postCreate');
+    Route::get('inventory/{id}/edit', 'InventoryController@getEdit');  
+
+    #Show logging
+    Route::get('logging/', 'InventoryController@loggingIndex');  
+    Route::get('logging/data', 'InventoryController@data');    
+    Route::post('logging/add', 'InventoryController@addInventory');
+    Route::get('logging/{id}/edit', 'InventoryController@getEdit');   
+
+  
+    #Show inventory
+    Route::get('activity/', 'TarikanController@index');  
+    Route::get('activity/data', 'TarikanController@data');    
+    Route::get('activity/reorder', 'TarikanController@getReorder');
+    Route::get('activity/create', 'TarikanController@getCreate');
+    Route::post('activity/create', 'TarikanController@postCreate');
+    Route::get('activity/{id}/delete', 'TarikanController@getDelete');
+    Route::post('activity/{id}/delete', 'TarikanController@postDelete');
+    Route::get('activity/{id}/edit', 'TarikanController@getEdit');
+    Route::post('activity/{id}/edit', 'TarikanController@postEdit');
+    Route::get('activity/{id}/see', 'TarikanController@see');
 
 
 

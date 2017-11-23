@@ -21,6 +21,7 @@
             <th>{{{ trans("admin/users.username") }}}</th>
             <th>{{{ trans("admin/users.email") }}}</th>
             <th>{{{ trans("admin/users.activated") }}}</th>
+            <th>{{{ trans("admin/admin.role") }}}</th>
             <th>{{{ trans("admin/admin.created_at") }}}</th>
             <th>{{{ trans("admin/admin.action") }}}</th>
         </tr>
@@ -41,6 +42,15 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ URL::to('operator/users/data/') }}",
+                "columns": [
+                    {name: 'users.name', searchable: false},
+                    {name: 'users.username', searchable: false},
+                    {name: 'users.email', searchable: false},
+                    {name: 'users.confirmed', searchable: false},
+                    {name: 'users.admin', searchable: false},
+                    {name: 'users.created_at', searchable: false}, 
+                    {name: 'actions', searchable: false} 
+                    ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({
                         iframe: true,

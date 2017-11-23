@@ -23,7 +23,6 @@
     <table id="table" class="table table-striped table-hover">
         <thead>
         <tr>
-            {{-- <th>{{{ trans("admin/admin.id") }}}</th> --}}
             <th>{{{ trans("admin/admin.customer_name") }}}</th>
             <th>{{{ trans("admin/admin.sales_name") }}}</th>
             <th>{{{ trans("admin/admin.segment") }}}</th>
@@ -34,6 +33,10 @@
         </thead>
         <tbody></tbody>
     </table>
+
+    <div><br><b>Export to :</b>
+    <a href="{{ URL::to('admin/customers/export') }}"><button> Excel</button></a>
+    </div>
 @stop
 
 {{-- Scripts --}}

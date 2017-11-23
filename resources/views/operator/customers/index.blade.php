@@ -21,11 +21,14 @@
             <th>{{{ trans("admin/admin.segment") }}}</th>
             <th>{{{ trans("admin/admin.cid") }}}</th>
             <th>{{{ trans("admin/admin.action") }}}</th>
-
         </tr>
         </thead>
         <tbody></tbody>
     </table>
+
+    <div><br><b>Export all to :</b>
+    <a href="{{ URL::to('operator/customers/export') }}"><button> Excel</button></a>
+    </div>
 @stop
 
 {{-- Scripts --}}
@@ -35,7 +38,8 @@
         var oTable;
         $(document).ready(function () {
             oTable = $('#table').DataTable({
-                "sDom": "<'row'<'col-md-3'l><'col-md-5'><'col-md-4'f>r>t<'row'<'col-md-6'i><'col-md-6'p> >",
+                "dom": "<'row'<'col-md-3'B>><'row'<'col-md-3'l><'col-md-5'><'col-md-4'f>r>t<'row'<'col-md-6'i> <'col-md-6'p> >",    
+                "buttons": ['excel','pdf','print'],
                 "sPaginationType": "bootstrap",
                 "processing": true,
                 "serverSide": true,
@@ -58,6 +62,12 @@
                     });
                 }
             });
+ $('#table tfoot th').each( function () {
+        var title = $('#table thead th').eq( $(this).index() ).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+         } );
+
+
         });
     </script>
 @stop

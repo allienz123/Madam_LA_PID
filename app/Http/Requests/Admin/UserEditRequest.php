@@ -13,7 +13,17 @@ class UserEditRequest extends FormRequest {
 	{
 		return [
             'name' => 'required|min:3',
+            'confirmed' => 'required',
+            'admin' => 'required',
 		];
+	}
+
+	public function messages()
+	{
+    	return [
+        'confirmed.required' => 'The activate user field is required',
+        'admin.required'  => 'The role field is required',
+    	];
 	}
 
 	/**

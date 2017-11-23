@@ -15,7 +15,7 @@
 					<label class="col-md-2 control-label" for="cid">{{
 						trans('admin/admin.nojar') }}</label>
 					<div class="col-md-10">
-						<input class="form-control" tabindex="1"
+						<input disabled class="form-control" tabindex="1"
 							placeholder="{{-- {{ trans('admin/admin.nojar') }} --}}" type="text"
 							name="cid" id="cid"
 							value="{{{ Input::old('cid', isset($dccustomer) ? $dccustomer->cid : null) }}}">
@@ -120,7 +120,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label" for="fpb_date">{{ trans('admin/admin.fpb') }}</label>
                     <div class="col-md-10">
-                        <input class="form-control" tabindex="1" 
+                        <input disabled class="form-control" tabindex="1" 
                         placeholder="{{ trans('admin/admin.date') }}" type="text" 
                         name="fpb_date" id="fpb_date" 
                         value="{{{ Input::old('fpb_date', isset($dccustomer) ? date("d-M-Y", strtotime($dccustomer->fpb_date)) : null) }}}">

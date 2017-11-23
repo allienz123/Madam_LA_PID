@@ -25,7 +25,6 @@
         <tr>
             {{-- <th>{{{ trans("admin/admin.id") }}}</th> --}}
             <th>{{{ trans("admin/admin.cid") }}}</th>
-            <th>{{{ trans("admin/admin.service_name") }}}</th>
             <th>{{{ trans("admin/admin.customer_name") }}}</th>
             <th>{{{ trans("admin/admin.location") }}}</th>
             <th>{{{ trans("admin/admin.rack_location") }}}</th> 
@@ -50,13 +49,10 @@
                 "ajax": "{{ URL::to('admin/cid/data/'.((isset($album))?$album->id:0)) }}",
                 "columns": [
                     {name: 'dc_customers.cid', searchable: true},
-                    {name: 'dc_customers.service_name' ,searchable: false},
                     {name: 'dc_customers.customer_name' ,searchable: false},
                     {name: 'dc_customers.location_name' ,searchable: false},   
                     {name: 'album_id', searchable: false} ,
                     {name: 'dc_customers.rack_location', searchable: true} 
-
-
                     ],
                 "fnDrawCallback": function (oSettings) {
                     $(".iframe").colorbox({

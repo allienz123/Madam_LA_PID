@@ -169,7 +169,10 @@ class DcCustomerController extends AdminController {
     public function postDelete(DeleteRequest $request,$id)
     {
         $dccustomer = DcCustomers::find($id);
-        $dccustomer -> delete();
+        //Not exactly delete but give flag 1. Means it's not include in datatables query
+        $dccustomer -> status = 1;
+        $dccustomer -> save();
+
     }
 
      /**
@@ -184,8 +187,9 @@ class DcCustomerController extends AdminController {
             ->join('service_type','service_type.id','=','dc_customers.service_type')
             ->join('dc_location','dc_location.id','=','dc_customers.dc_location')
             ->where('dc_customers.customer_id',$condition,$albumid)
+            ->where('dc_customers.status', '=' , '0')
            // ->select(array('dc_customers.id','dc_customers.cid', 'customers.customer_name', 'dc_location.location_name'));
-            ->select(array('dc_customers.id', DB::raw($albumid . ' as albumid'), DB::getTablePrefix().'dc_customers.cid', DB::getTablePrefix().'service_type.service_name', DB::getTablePrefix().'customers.customer_name', DB::getTablePrefix(). 'dc_location.location_name', 'dc_customers.rack_location'));
+            ->select(array('dc_customers.id', DB::raw($albumid . ' as albumid'), DB::getTablePrefix().'dc_customers.cid', DB::getTablePrefix().'customers.customer_name', DB::getTablePrefix(). 'dc_location.location_name', 'dc_customers.rack_location'));
         
         return Datatables::of($dccustomer)
             ->addColumn('Actions', '

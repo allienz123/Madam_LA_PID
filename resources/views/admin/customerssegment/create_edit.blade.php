@@ -15,7 +15,7 @@
 						trans('admin/admin.segment_name') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="1"
-							placeholder="{{ trans('admin/admin.segment_name') }}" type="text"
+							placeholder="" type="text"
 							name="segment_name" id="segment_name"
 							value="{{{ Input::old('segment_name', isset($user) ? $user->segment_name : null) }}}">
 					</div>

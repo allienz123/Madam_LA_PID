@@ -15,7 +15,7 @@
 						trans('admin/admin.service_name') }}</label>
 					<div class="col-md-10">
 						<input class="form-control" tabindex="1"
-							placeholder="{{ trans('admin/admin.service_name') }}" type="text" name="service_name" id="service_name"
+							placeholder="" type="text" name="service_name" id="service_name"
 							value="{{{ Input::old('service_name', isset($service) ? $service->service_name : null) }}}">
 					</div>
 				</div>

@@ -9,6 +9,9 @@ use App\Http\Requests\Admin\DeleteRequest;
 use App\Http\Requests\Admin\ReorderRequest;
 use Illuminate\Support\Facades\Auth;
 use Datatables;
+use Carbon\Carbon;
+use Excel;
+
 
 class CustomerController extends AdminController {
     /*
@@ -150,6 +153,57 @@ class CustomerController extends AdminController {
             }
         }
         return $list;
+    }
+
+    public function exportExcel() 
+    {
+        $date = Carbon::now('Asia/Jakarta')->format('d_m_Y');
+        //Set excel title
+        Excel::create('CustomerDC'.'_'. $date, function($excel) {
+        //First sheet
+        $excel->sheet('Customer', function($sheet) {
+
+        // first row styling and writing content
+        $sheet->mergeCells('A1:D1');
+        $sheet->loadView('export');
+        $sheet->row(1, function ($row) {
+            $row->setFontFamily('Calibri');
+            $row->setFontSize(30);
+        });
+
+        //$sheet->row(1, array('Lintasarta Customer'));
+
+        // second row styling and writing content
+        $sheet->row(2, function ($row) {
+
+            // call cell manipulation methods
+            $row->setFontFamily('Calibri');
+            $row->setFontSize(15);
+            $row->setFontWeight('bold');
+
+        }); 
+
+        $sheet->row(2, array('No.','Customer','Sales','Segmentation'));
+        //Make freeze view
+        $sheet->setFreeze('A3');
+
+        $customers = Customers::join('customers_segment','customers_segment.id','=','customers.customers_segment')
+            ->select(array(
+                'customers.customer_name',
+                'customers.customer_sales', 
+                'customers_segment.segment_name'))->get();
+         
+        // putting users data as next rows
+        $number=1;
+        foreach ($customers as $customer) 
+        {
+            $sheet->appendRow(array($number,$customer->customer_name,$customer->customer_sales,$customer->segment_name));
+            $number++;
+        }
+
+         }); //End of sheet
+        //End of excel
+        })->export('xlsx');
     }
 
 

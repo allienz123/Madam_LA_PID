@@ -15,5 +15,8 @@ return [
     'see' => 'See',
     'back' => 'Back',
     'activate' => 'Activate',
+    'respond' => 'Respond',
+    'view_edit' => 'View / Edit'
+
 
 ];

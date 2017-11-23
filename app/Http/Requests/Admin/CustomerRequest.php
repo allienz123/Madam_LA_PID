@@ -12,7 +12,7 @@ class CustomerRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-            'customer_name' => 'required|unique:customers,customer_name',
+            'customer_name' => 'required|unique:customers,customer_name,' .$this->id,
             'customers_segment' => 'required|integer',
             'customer_sales' => 'required',           
 		];

@@ -11,6 +11,7 @@
 
     <link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
 
+
 @endsection
 
 {{-- Sidebar --}}
@@ -25,9 +26,10 @@
     <script src="{{ elixir('js/admin.js') }}"></script>
 
     {{-- Not yet a part of Elixir workflow --}}
-    <script src="{{asset('assets/admin/js/bootstrap-dataTables-paging.js')}}"></script>
-    <script src="{{asset('assets/admin/js/datatables.fnReloadAjax.js')}}"></script>
     <script src="{{asset('assets/admin/js/modal.js')}}"></script>
+    <script src="{{asset('assets/admin/js/highcharts.js')}}"></script>
+    <script src="{{asset('assets/admin/js/exporting.js')}}"></script>
+
 
     {{-- Default admin scripts--}}
     <script type="text/javascript">

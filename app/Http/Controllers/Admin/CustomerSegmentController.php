@@ -75,7 +75,7 @@ class CustomerSegmentController extends AdminController {
         ->select(array('id','segment_name', 'created_at', 'updated_at'));
         return Datatables::of($segment)
         ->add_column('Actions', '<a href="{{{ URL::to(\'admin/customerssegment/\' . $id . \'/delete\' ) }}}" class="btn btn-xs btn-danger iframe"><span class="glyphicon glyphicon-trash"></span> {{ trans("admin/modal.delete") }}</a>')
-        ->remove_column('updated_at')
+        ->remove_column('updated_at','id')
         ->make();
     }
 

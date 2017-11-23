@@ -63,8 +63,16 @@ class UserController extends OperatorController {
     public function data()
     {
         $id = Auth::user()->id;
-        $user = User::select(array('users.id','users.name','users.username','users.email','users.confirmed', 'users.created_at'))->where('users.id' ,'=', $id);
+        $user = User::select(array(
+            'users.id',
+            'users.name',
+            'users.username',
+            'users.email',
+            'users.confirmed',
+            'users.admin',
+            'users.created_at'))->where('users.id' ,'=', $id);
         return Datatables::of($user)
+            ->edit_column('admin', '@if ($admin=="1") Admin @else Operator @endif')
             ->edit_column('confirmed', '@if ($confirmed=="1") Yes @else No @endif')
             ->add_column('actions', '<a href="{{{ URL::to(\'operator/users/\' . $id . \'/edit\' ) }}}" class="btn btn-warning btn-xs iframe" ><span class="glyphicon glyphicon-pencil"></span>  {{ trans("admin/modal.edit") }}</a>')
             ->remove_column('id')

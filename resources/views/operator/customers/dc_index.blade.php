@@ -26,6 +26,9 @@
         </thead>
         <tbody></tbody>
     </table>
+    <div><br><b>Export to :</b>
+    <a href="{{ URL::to('operator/customers/export') }}"><button> Excel</button></a>
+    </div>
 @stop
 
 {{-- Scripts --}}
